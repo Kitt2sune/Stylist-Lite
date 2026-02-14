@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проектная работа по компьютерному зрению Virtual Stylist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Virtual<span>Colorizer</span></div>
+        <div id="status">Ожидание файла...</div>
+    </header>
+
+    <div class="toolbar">
+        <div class="group">
+            <input type="file" id="upload" hidden accept="image/*">
+            <button onclick="document.getElementById('upload').click()" class="btn-main">Загрузить фото</button>
+        </div>
+
+        <div class="group">
+            <label>Цвет:</label>
+            <input type="color" id="colorPicker" value="#6200ee">
+        </div>
+
+        <div class="group">
+            <label>Яркость:</label>
+            <input type="range" id="brightness" min="-100" max="100" value="0" oninput="applyColor()">
+        </div>
+
+        <div class="group">
+            <label>Прозрачность:</label>
+            <input type="range" id="opacity" min="0" max="100" value="100" oninput="applyColor()">
+        </div>
+
+        <div class="group">
+            <button onclick="saveCurrentLayer()" class="btn-main">Зафиксировать слой</button>
+        </div>
+
+        <div class="group">
+            <button onclick="applyColor()" class="btn-apply">Применить цвет</button>
+            <button onclick="resetToOriginal()" class="btn-danger">Сброс</button>
+        </div>
+
+        <div class="group">
+            <button onclick="downloadImage()" class="btn-secondary">Скачать</button>
+        </div>
+    </div>
+
+    <main class="editor-container">
+        <div class="canvas-wrapper">
+            <canvas id="mainCanvas"></canvas>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
